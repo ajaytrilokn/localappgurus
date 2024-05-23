@@ -65,7 +65,7 @@
 												<h4 class="text-center"><?php echo the_field('form_title');?></h4>
 												<p class="orange_text"><?php echo the_field('form_small_title');?></p>
 											</div>
-											<?php echo do_shortcode('[contact-form-7 id="5df541d" title="Free Consultation"]');?>
+											<?php echo do_shortcode('[contact-form-7 id="1074" title="Free Consultation"]');?>
 		                                        <div class="banner-form-text text-center">
 		                                        	<p><?php echo the_field('form_footer_text');?></p> 
 		                                        	<div class="call-person-main">

@@ -1199,3 +1199,41 @@ function add_file_types_to_uploads($file_types){
 	add_filter('upload_mimes', 'add_file_types_to_uploads');
 
 
+	// Redirect to thank you page
+add_action( 'wp_footer', 'wpm_redirect_cf7' );
+function wpm_redirect_cf7() {
+
+	global $wp_query;
+	$post_id = $wp_query->post->ID;
+
+	$post = get_post( $post_id );
+	$slug = $post->post_name;	
+	
+    if ( is_page( 9 ) ) {
+        // Page ID is 7574
+        $thank_you_page = 'http://localhost/wp/appguruss/thank-you/?strRedirect=home';
+    }  else {
+        // Default page
+        $thank_you_page = 'http://localhost/wp/appguruss/thank-you/?url='.$slug.'&strRedirect=home';
+    } ?>
+ 
+    <script type="text/javascript">
+    document.addEventListener('wpcf7mailsent', function(event) {
+        location = '<?php echo $thank_you_page; ?>';
+    }, false);
+    </script>
+<?php }
+
+
+// Without slace to with slace
+
+add_action('template_redirect', 'add_trailing_slash');
+function add_trailing_slash() {
+    if (is_singular() && !is_admin()) {
+        $requested_url = $_SERVER['REQUEST_URI'];
+        if (substr($requested_url, -1) != '/' && !is_404()) {
+            wp_redirect(trailingslashit($requested_url), 301);
+            exit();
+        }
+    }
+}
